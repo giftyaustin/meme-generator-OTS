@@ -1,0 +1,35 @@
+.meme-template{
+    width: 140px;
+    height: 140px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.meme-card{
+    display: flex;
+    width: 150px;
+    height: 200px;
+    border: 1px solid white;
+    border-radius: 6px;
+    padding-top: 5px;
+    
+}
+.meme-card-holder{
+    display: inline-block;
+    padding: 10px;
+}
+.meme-name{
+    color: white;
+    font-size: xx-small;
+    padding-left: 5px;
+    
+   
+    
+}
+.meme-name-holder{
+    display: flex;
+    line-height: 10px;
+    height: 20px;
+    align-items: center;
+    
+}
