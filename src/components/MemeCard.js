@@ -1,12 +1,25 @@
-import React from 'react';
-import "./memecard.css"
+import React  from 'react';
+import "./memecard.css";
+import {useNavigate} from "react-router-dom"
+
 
 const MemeCard = ({meme}) => {
+const history = useNavigate()
+
+// ========= meme selected ==============
+const memeSelected = ()=>{
+sessionStorage.setItem("memeSelected", JSON.stringify(meme))
+history("/generate")
+}
+
+
   return (
     <div style={{"display":"inline-block"}}>
         
       <div className="meme-card-holder">
-        <div className="meme-card justify-content-center">
+        <div className="meme-card justify-content-center" onClick={()=>{
+          memeSelected();
+        }}>
             <div className='justify-content-center'>
         
             <div className='meme-name-holder text-start'>

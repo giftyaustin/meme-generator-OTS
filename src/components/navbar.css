@@ -36,3 +36,52 @@
     background-color: #950740;
     box-shadow: none;
 }
+
+.logo-holder{
+    display: flex;
+    
+    height: 35px;
+    overflow-x: hidden;
+}
+
+.logo{
+    
+    position: relative;
+    object-fit: contain;
+    width: 100%;
+    animation: logo;
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    right: -110px;
+    
+}
+@keyframes logo {
+    from{
+        right: -110px;
+    }
+    50%{
+       right: -5px;
+    }
+    to{
+        right: -125px;
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    /* *{
+        background-color: red;
+    } */
+    .search-btn{
+        font-size: x-small;
+        height: 27px;
+    }
+    .search-input{
+        font-size: x-small;
+        height: 30px;
+        width: 110px;
+    }
+    
+}
+

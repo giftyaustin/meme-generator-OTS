@@ -2,3 +2,11 @@ body{
     background-color: #1A1A1D;
 }
 
+.memes-block{
+    padding:10px 0 10px 0;
+}
+
+.select-meme-text{
+    color: rgb(226, 226, 226);
+    margin-bottom: 10px;
+}

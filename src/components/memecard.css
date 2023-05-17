@@ -1,26 +1,31 @@
 .meme-template{
+    color: rgb(230, 230, 230);
     width: 140px;
     height: 140px;
     padding: 5px;
     border-radius: 10px;
+    font-size: small;
 }
 
 .meme-card{
     display: flex;
-    width: 150px;
-    height: 200px;
-    border: 1px solid white;
+    /* background-color: rgb(221, 221, 221); */
+    width: 160px;
+    height: 180px;
+    /* border-right: 1px solid rgba(204, 204, 204, 0.603);
+    border-bottom: 1px solid rgba(204, 204, 204, 0.603); */
     border-radius: 6px;
     padding-top: 5px;
+    box-shadow: 0 0 3px 1px rgba(128, 128, 128, 0.651);
     
 }
 .meme-card-holder{
     display: inline-block;
-    padding: 10px;
+    padding: 5px;
 }
 .meme-name{
-    color: white;
-    font-size: xx-small;
+    color: rgb(230, 230, 230);
+    font-size: x-small;
     padding-left: 5px;
     
    
@@ -28,7 +33,7 @@
 }
 .meme-name-holder{
     display: flex;
-    line-height: 10px;
+    line-height: 12px;
     height: 20px;
     align-items: center;
     
