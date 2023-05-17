@@ -144,7 +144,18 @@ const Generate = () => {
         </div>
       ) : (
         <div className="text-center my-3">
-          <button className="btn generate-btn" onClick={generateMeme}>
+          <button className="btn generate-btn" onClick={()=>{
+            var filteredCaptions = []
+            filteredCaptions = captions.filter((c)=>{
+              return(c!==""&&c.replaceAll(" ","")!=="")
+            })
+            if(filteredCaptions.length !==0){
+              generateMeme()
+            }
+            else{
+              alert('Enter atleast one caption')
+            }
+          }}>
             Generate
           </button>
         </div>

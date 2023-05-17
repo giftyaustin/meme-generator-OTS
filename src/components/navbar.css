@@ -1,4 +1,5 @@
 .nav-holder{
+   
     border-bottom: 1px solid rgb(160, 147, 147);
     padding: 15px;
     border-radius: 6px;
@@ -10,26 +11,57 @@
     justify-content: flex-start;
     align-items: center;
 }
-
+.input-holder{
+    overflow-x: hidden;
+}
 .search-input{
+    left: 0px;
+    position: relative;
     height: 40px;
     border-radius: 6px;
     padding-left: 10px;
     background-color: rgb(238, 238, 238);
     padding-bottom: 3px;
+    animation: search-box;
+    animation-duration: 1s;
 }
+@keyframes search-box {
+    from{
+     left: -200px;
+    }
+    to{
+        left: 0px;
+    }
+    
+}
+
 
 .search-holder{
     padding-left: 10px;
+    overflow-y: hidden;
 }
 
 
 .search-btn{
+    position: relative;
+    top: 0px;
     color: rgb(229, 229, 229);
     background-color: #c3073f;
     border: #6f2232;
     padding-bottom: 8px;
     box-shadow: 0 0 3px 1px rgba(150, 150, 150, 0.242);
+    animation: search-btn;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+@keyframes search-btn {
+    from{
+        top: -50px;
+    }
+    to{
+        top: 0px;
+    }
 }
 .search-btn:hover{
     color: rgb(229, 229, 229);

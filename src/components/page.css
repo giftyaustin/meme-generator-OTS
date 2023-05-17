@@ -17,3 +17,12 @@
 .highlight{
     border: 1px solid red;
 }
+
+.prev-next-btn{
+    color: rgb(231, 231, 231);
+    background-color: #c3073f;
+}
+.prev-next-btn:hover{
+    color: rgb(231, 231, 231);
+    background-color: #950740;
+}

@@ -91,7 +91,18 @@ const searchMemes = (searchValue)=>{
       }
      
 }
-
+var viewAllResult;
+try {
+  viewAllResult=memes.length!==data.length;
+  
+} catch (error) {
+  
+}
+// ============== view all memes =====================
+const viewAllMemes= ()=>{
+  setMemes(data);
+  
+}
 
   return (
     <div className="App">
@@ -106,8 +117,9 @@ const searchMemes = (searchValue)=>{
 
    {/* ======= Meme Card component */}
         <div className="container-fluid text-center memes-block">
-          <div className="select-meme-text">Tap on the meme template you want to select</div>
-          {!memes[1]?<div className="my-3 no-memes">No memes found</div>:""}
+          {!pages===0?<div className="select-meme-text">Tap on the meme template you want to select</div>:""}
+          {pages===0?<div className="my-3 no-memes">No memes found</div>:""}
+          {!viewAllResult?"":<div><button className="btn view-all-btn btn-sm my-3" onClick={viewAllMemes}>View all</button></div>}
       {currMemes?currMemes.map((c,i)=>{
         return(<MemeCard meme = {c} key={i}/>)
       }):""}

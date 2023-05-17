@@ -1,14 +1,28 @@
 .meme-template{
+    position: relative;
     color: rgb(230, 230, 230);
     width: 140px;
     height: 140px;
     padding: 5px;
     border-radius: 10px;
     font-size: small;
+    top: 0px;
+    animation: meme-template;
+    animation-duration: 1s;
+}
+
+@keyframes meme-template {
+        from{
+            top : -200px
+        }    
+        to{
+            top : 0px
+        }
 }
 
 .meme-card{
     display: flex;
+    overflow-y: hidden;
     /* background-color: rgb(221, 221, 221); */
     width: 160px;
     height: 180px;
