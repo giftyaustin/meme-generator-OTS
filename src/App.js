@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import "./app.css";
+import "./App.css";
 import { useEffect, useState } from "react";
 import MemeCard from "./components/MemeCard";
 import {Routes, Route} from "react-router-dom";
