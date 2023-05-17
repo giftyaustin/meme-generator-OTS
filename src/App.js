@@ -107,6 +107,7 @@ const searchMemes = (searchValue)=>{
    {/* ======= Meme Card component */}
         <div className="container-fluid text-center memes-block">
           <div className="select-meme-text">Tap on the meme template you want to select</div>
+          {!memes[1]?<div className="my-3 no-memes">No memes found</div>:""}
       {currMemes?currMemes.map((c,i)=>{
         return(<MemeCard meme = {c} key={i}/>)
       }):""}

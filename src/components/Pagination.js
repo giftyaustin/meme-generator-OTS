@@ -2,12 +2,15 @@ import React from "react";
 import "./page.css";
 
 const Pagination = ({pages, changePage, currPage, nextPage, prevPage}) => {
+  console.log(pages)
   return (
     <div>
       <div className="pagination-holder">
         <div className="prev-next-holder container text-center justify-content-center">
+        {console.log(pages)}
           {currPage===0?"":<button className="btn btn-danger mx-3 my-3" onClick={()=>{prevPage(currPage)}}>Prev</button>}
-          {currPage===pages-1?"":<button className="btn btn-danger mx-3 my-3" onClick={()=>{nextPage(currPage)}}>Next</button>}
+          
+          {(pages===0)&&(currPage!==pages-1)?"":<button className="btn btn-danger mx-3 my-3" onClick={()=>{nextPage(currPage)}}>Next</button>}
         </div>
         <div className="pages-holder container text-center">
         
