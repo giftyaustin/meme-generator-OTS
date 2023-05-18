@@ -1,5 +1,6 @@
 .nav-holder{
-   
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid rgb(160, 147, 147);
     padding: 15px;
     border-radius: 6px;
@@ -101,6 +102,8 @@
     
 }
 
+/* ============ for mobiles ============= */
+
 @media screen and (max-width:450px) {
     /* *{
         background-color: red;
@@ -117,3 +120,48 @@
     
 }
 
+/*  ============ under 300px ============= */
+
+@media screen and (max-width: 300px){
+    .search-btn{
+        padding: 0;
+        width: 100%;
+      
+    }
+    .search-holder{
+        padding:0;
+        padding-left: 1px;
+        width: 25%;
+    }
+    .input-holder{
+        width: 50%;
+        display: inline;
+        
+    }
+    .input-search-holder{
+        padding: 0;
+    }
+    .search-input{
+        position: relative;
+        width: 100%;
+       padding: 0;
+       font-size: 68%;
+    }
+}
+
+
+/* ======== for tablets ============= */
+@media screen and (min-width:1000px){
+@keyframes logo {
+    from{
+        right: -400px;
+    }
+    50%{
+       right: -200px;
+    }
+    to{
+        right: -400px;
+    }
+    
+}
+}

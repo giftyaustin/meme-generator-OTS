@@ -1,10 +1,13 @@
 import Navbar from "./components/Navbar";
 import "./App.css";
-import { useEffect, useState } from "react";
-import MemeCard from "./components/MemeCard";
+import { useEffect, useState , lazy, Suspense} from "react";
+
 import {Routes, Route} from "react-router-dom";
-import Generate from "./components/Generate";
-import Pagination from "./components/Pagination";
+
+
+const Generate = lazy(()=>import("./components/Generate.js"));
+const MemeCard = lazy(()=>import("./components/MemeCard.js"));
+const Pagination = lazy(()=>import("./components/Pagination.js"));
 
 function App() {
 
@@ -108,7 +111,7 @@ const viewAllMemes= ()=>{
     <div className="App">
 
       
-
+<Suspense>
 <Routes>
 
   <Route exact path="/" element= {<>
@@ -126,15 +129,19 @@ const viewAllMemes= ()=>{
 
       
       </div>
+      <Suspense fallback = {<div>Loading...</div>}>
       <Pagination pages = {pages} changePage={changePage} currPage={currPage} nextPage={nextPage} prevPage={prevPage}/>
+      </Suspense>
       </>}/>
 
     {/* ====== Generate component ====== */}
+ 
 
-<Route exact path="/generate" element={<Generate/>}/>
+<Route exact path="/generate" element={<Suspense fallback={<div>loading...</div>}><Generate/></Suspense>}/>
+
     
 </Routes>
-
+</Suspense>
     </div>
   );
 }

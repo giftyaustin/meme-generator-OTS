@@ -14,13 +14,13 @@ history("/generate")
 
 
   return (
-    <div style={{"display":"inline-block"}}>
+    <div style={{"display":"inline-block"}}className='meme-'>
         
       <div className="meme-card-holder">
         <div className="meme-card justify-content-center" onClick={()=>{
           memeSelected();
         }}>
-            <div className='justify-content-center'>
+            <div className='justify-content-center big-screen'>
         
             <div className='meme-name-holder text-start'>
         <span className='meme-name'>{meme.name}</span></div>
