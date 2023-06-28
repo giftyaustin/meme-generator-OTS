@@ -119,6 +119,21 @@
     }
     
 }
+@media screen and (max-width:500px) {
+    /* *{
+        background-color: red;
+    } */
+    .search-btn{
+        font-size: x-small;
+        height: 27px;
+    }
+    .search-input{
+        font-size: x-small;
+        height: 30px;
+        width: 110px;
+    }
+    
+}
 
 /*  ============ under 300px ============= */
 
@@ -151,17 +166,4 @@
 
 
 /* ======== for tablets ============= */
-@media screen and (min-width:1000px){
-@keyframes logo {
-    from{
-        right: -400px;
-    }
-    50%{
-       right: -200px;
-    }
-    to{
-        right: -400px;
-    }
-    
-}
-}
+

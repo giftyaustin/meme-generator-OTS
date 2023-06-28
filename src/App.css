@@ -6,6 +6,9 @@ body{
 
 .memes-block{
     padding:10px 0 10px 0;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     
 }
 
