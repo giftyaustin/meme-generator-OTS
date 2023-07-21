@@ -1,0 +1,169 @@
+.loginbox{
+    height: 100vh;
+    width: 50vw;
+    max-width: 900px;
+    padding: 10px;
+}
+
+.login-outline{
+    position: relative;
+    /* border: 1px solid white; */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 1px rgba(217, 217, 217, 0.684);
+    /* height: 50%; */
+   width: clamp(300px, 40vw, 500px);
+  
+    
+}
+*{
+    color: white;
+    font-size: small;
+}
+
+.light-point{
+    position: absolute;
+    pointer-events: none;
+    top: 100%;
+    right: 100%;
+    height: 1px;
+    width: 1px;
+    background-color: rgba(229, 24, 24, 0.533);
+    border-radius: 90%;
+    box-shadow: 0 0 70px 10px rgb(248, 5, 5);
+    animation: border-light;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+    animation-timing-function: cubic-bezier(0.98, 0.99, 1, 1);
+}
+@keyframes border-light {
+    0%{
+        top: 100%;
+        right: 100%;
+    }
+    25%{
+        top: 0;
+        right: 100%;
+    }
+    50%{
+        top: 0;
+        right: 0;
+    }
+    75%{
+        top: 100%;
+        right: 0;
+    }
+    100%{
+        top: 100%;
+        right: 100%;
+    }
+}
+
+.username-i{
+    width: 100%;
+    height: 50px;
+    padding-left: 10px;
+    color: black;
+    
+}
+.line{
+    margin: 30px 0 30px 0;
+    border-top: 1px solid white;
+    border-radius: 60px;
+}
+.username-i-h{
+    height: 50px;
+    margin: 20px 0 20px 0;
+}
+
+.login-btn{
+    height: 50px;
+    background-color: #c3073f;
+    border: 0;
+    border-radius: 20px;
+}
+
+.nc-signup-btn{
+    background-color: #c3073f;
+    border: 0;
+    border-radius: 6px;
+    font-weight: 100;
+    font-size: small;
+    padding: 5px;
+}
+.login-btn-h{
+    margin: 30px 0 30px 0;
+}
+
+
+@media  screen and (max-width:420px) {
+    .loginbox{
+        width:100vw;
+        
+    }
+    .login-outline{
+        width: 100%;
+    }
+    .username-i{
+        height: 30px;
+    }
+    .username-i-h{
+        margin: 0 0 10px 0;
+        height: 30px;
+    }
+    .line{
+        margin: 15px 0 15px 0;
+    }
+    .login-btn-h{
+        margin: 0 0 15px 0;
+    }
+    .login-btn{
+        height: 30px;
+    }
+    .no-account-h{
+        margin: 0 !important;
+    }
+    .no-account-text{
+        font-size: x-small;
+    }
+    .nc-signup-btn{
+        font-size: xx-small;
+    }
+}
+
+@media  screen and (max-width:280px) {
+    .no-account-text{
+        font-size: xx-small;
+    }
+    .nc-signup-btn{
+        font-size:10px;
+    }
+}
+
+.demo-text{
+    user-select: none;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    top: 20px;
+    transform: rotate(1turn);
+    animation: demoTurn;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+   
+}
+@keyframes demoTurn {
+    0%{
+        transform: rotate(0turn);
+        
+    }
+    25%{
+        transform: rotate(1turn);
+    }
+    75%{
+        transform: rotate(1turn);
+    }
+    100%{
+        transform: rotate(0turn);
+    }
+}

@@ -24,3 +24,11 @@ body{
     color: white;
     background-color: #c3073f;
 }
+.your-memes-btn{
+    color: white;
+    background-color: #c3073f;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    margin: 10px 0px;
+}

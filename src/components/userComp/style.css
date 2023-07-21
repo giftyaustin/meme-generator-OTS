@@ -1,0 +1,10 @@
+.im-bl{
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+    margin: 20px;
+}
+.im-bl>img{
+    height: 100%;
+    width: 100%;
+}

@@ -3,8 +3,11 @@ import "./generate.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { saveAs } from "file-saver";
+import { useContext } from "react";
+import { userContext } from "./context/userContext";
 
 const Generate = () => {
+  const {isGuest} = useContext(userContext)
   const history = useNavigate();
   const [url, setUrl] = useState();
 
@@ -46,6 +49,27 @@ const Generate = () => {
     fetchRawMeme();
   }, []);
 
+
+  const storeMeme = ()=>{ 
+   if(generatedMemeUrl){
+   
+      if(!isGuest){
+        const data = {image:generatedMemeUrl, at: localStorage.getItem('at')}
+        fetch("http://localhost:5000/upload", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(data),
+        }).catch((err)=>{console.log(err)})
+      }
+    }
+    
+  }
+
+  useEffect(()=>{
+    storeMeme();
+  },[generatedMemeUrl])
+
+
   // ==========================================================================
 
   // ================= meme generation ===================
@@ -64,6 +88,8 @@ const Generate = () => {
       res.json().then((res) => {
         try {
           setGeneratedMemeUrl(res.data.url);
+       
+         
         } catch (error) {
           console.log(error);
         }
@@ -86,7 +112,7 @@ const Generate = () => {
           className="back-btn btn btn-danger"
           onClick={() => {
             sessionStorage.clear();
-            history("/");
+            history("/main");
           }}
         >
           Back
@@ -119,7 +145,7 @@ const Generate = () => {
                 <div className="container-fluid text-center my-3" key={i}>
                   <div className="text-name mx-3">Text {i + 1}: </div>
                   <div className="caption-input-holder mx-3">
-                    <input
+                    <input style={{color:'black'}}
                       type="text"
                       value={captions[i]}
                       onChange={(e) => {
@@ -150,6 +176,7 @@ const Generate = () => {
               return(c!==""&&c.replaceAll(" ","")!=="")
             })
             if(filteredCaptions.length !==0){
+           
               generateMeme()
             }
             else{
@@ -160,6 +187,7 @@ const Generate = () => {
           </button>
         </div>
       )}
+
     </div>
   );
 };

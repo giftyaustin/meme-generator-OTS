@@ -25,6 +25,9 @@
     padding-bottom: 3px;
     animation: search-box;
     animation-duration: 1s;
+    color: black;
+    outline: none;
+    border: none;
 }
 @keyframes search-box {
     from{

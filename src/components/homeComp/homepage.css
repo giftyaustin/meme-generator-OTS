@@ -1,0 +1,16 @@
+.btns-h{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+.guest-btn, .home-login-btn{
+    border: 1px solid white;
+    width: 150px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    background-color: transparent;
+    color: white;
+}
