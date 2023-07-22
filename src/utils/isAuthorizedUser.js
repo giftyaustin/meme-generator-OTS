@@ -3,7 +3,7 @@ import { NO_USER, USER_FETCHED } from "../store/constants";
 export const isAuthorizedUser = async (dispatch) => {
   try {
     const data = { special: "authorizationCheck" };
-    const response = await fetch("http://localhost:5000/user", {
+    const response = await fetch(`${process.env.REACT_APP_CLIENT_URL}/user`, {
       method: "POST",
       credentials: 'include',
       headers: {

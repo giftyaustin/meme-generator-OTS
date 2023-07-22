@@ -12,7 +12,7 @@ const LoginPage = () => {
   const handleRegistration = async () => {
     if (rusername.length && rpassword.length) {
       const data = { username: rusername, password: rpassword };
-      const response = await fetch("http://localhost:5000/signup", {
+      const response = await fetch(`${process.env.REACT_APP_CLIENT_URL}/signup`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(data),
@@ -35,7 +35,7 @@ const LoginPage = () => {
 const handleLogin=async()=>{
     if (username.length && password.length) {
         const data = { username: username, password: password };
-        const response = await fetch("http://localhost:5000/login", {
+        const response = await fetch(`${process.env.REACT_APP_CLIENT_URL}/login`, {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
