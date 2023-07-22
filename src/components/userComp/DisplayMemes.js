@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { userContext } from '../context/userContext'
 import { useContext } from 'react'
 import './style.css'
 
-const DisplayMemes = () => {
+const DisplayMemes = ({fetchUserMemes}) => {
     const {memes} = useContext(userContext)
     console.log(memes)
+
+
+
+useEffect(()=>{
+  fetchUserMemes()
+},[])
+
   return (
     <div className='DisplayMemes'>
     

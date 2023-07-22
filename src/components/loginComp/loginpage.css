@@ -1,8 +1,9 @@
 .loginbox{
     height: 100vh;
-    width: 50vw;
-    max-width: 900px;
+    /* width: 50vw;
+    max-width: 900px; */
     padding: 10px;
+    transition: 0.2s;
 }
 
 .login-outline{
@@ -12,7 +13,8 @@
     border-radius: 10px;
     box-shadow: 0 0 10px 1px rgba(217, 217, 217, 0.684);
     /* height: 50%; */
-   width: clamp(300px, 40vw, 500px);
+   width: clamp(250px, 90vw, 450px);
+
   
     
 }
@@ -96,74 +98,6 @@
 }
 
 
-@media  screen and (max-width:420px) {
-    .loginbox{
-        width:100vw;
-        
-    }
-    .login-outline{
-        width: 100%;
-    }
-    .username-i{
-        height: 30px;
-    }
-    .username-i-h{
-        margin: 0 0 10px 0;
-        height: 30px;
-    }
-    .line{
-        margin: 15px 0 15px 0;
-    }
-    .login-btn-h{
-        margin: 0 0 15px 0;
-    }
-    .login-btn{
-        height: 30px;
-    }
-    .no-account-h{
-        margin: 0 !important;
-    }
-    .no-account-text{
-        font-size: x-small;
-    }
-    .nc-signup-btn{
-        font-size: xx-small;
-    }
-}
 
-@media  screen and (max-width:280px) {
-    .no-account-text{
-        font-size: xx-small;
-    }
-    .nc-signup-btn{
-        font-size:10px;
-    }
-}
 
-.demo-text{
-    user-select: none;
-    display: inline-block;
-    position: relative;
-    margin: 0;
-    top: 20px;
-    transform: rotate(1turn);
-    animation: demoTurn;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-   
-}
-@keyframes demoTurn {
-    0%{
-        transform: rotate(0turn);
-        
-    }
-    25%{
-        transform: rotate(1turn);
-    }
-    75%{
-        transform: rotate(1turn);
-    }
-    100%{
-        transform: rotate(0turn);
-    }
-}
+

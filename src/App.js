@@ -7,20 +7,25 @@ import Home from "./components/homeComp/Home";
 import { userContext } from "./components/context/userContext";
 import LoginPage from "./components/loginComp/LoginPage";
 import { useNavigate } from "react-router-dom";
+import LoadingMain from "./components/loadingComp/LoadingMain";
+import { useDispatch, useSelector } from "react-redux";
+import { MEMES_LOADING, MEMES_SUCCESS } from "./store/constants";
 
 const Generate = lazy(() => import("./components/Generate.js"));
 const MemeCard = lazy(() => import("./components/MemeCard.js"));
 const Pagination = lazy(() => import("./components/Pagination.js"));
 
 function App() {
+  const dispatch = useDispatch()
   const [isGuest, setIsGuest] = useState(false);
   const history = useNavigate();
   const [memes, setMemes] = useState();
   const [userMemes, setUserMemes] = useState();
   const [data, setData] = useState();
-  const [currMemes, setCurrMemes] = useState();
+  const {currMemes} =useSelector(state=>state.currMemes) 
   const [pages, setPages] = useState();
   const [currPage, setCurrPage] = useState(0);
+  const {user} = useSelector(state=>state.user)
 
   // ============= fetching memes ===========================
 
@@ -33,6 +38,7 @@ function App() {
   };
 
   useEffect(() => {
+    dispatch({type:MEMES_LOADING})
     fetchMemes();
   }, []);
 
@@ -59,7 +65,8 @@ function App() {
 
   const displayCurrMemes = () => {
     if (memes) {
-      setCurrMemes(memes.slice(currPage * 20, currPage * 20 + 20));
+      dispatch({type:MEMES_SUCCESS, payload:memes.slice(currPage * 20, currPage * 20 + 20)})
+      // setCurrMemes(memes.slice(currPage * 20, currPage * 20 + 20));
     }
   };
 
@@ -109,23 +116,17 @@ function App() {
   };
   const fetchUserMemes = async () => {
     
-    const data = { at: localStorage.getItem("at") };
     const response = await fetch(
-      "http://localhost:5000/fetch",
+      `${process.env.REACT_APP_CLIENT_URL}/image/fetch`,
       {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(data),
+        credentials:"include"
       }
     );
     const memedata = await response.json();
    
-    if (memedata.memes) {
+    if (memedata.memes && memedata.memes.length) {
       console.log(memedata.memes)
-      const temp = memedata.memes.map((c, i) => {
-        return c.image;
-      });
-      setUserMemes(temp);
+      setUserMemes(memedata.memes);
     
     } else {
       alert("no memes to show, create some !");
@@ -183,24 +184,22 @@ function App() {
                   </button>
                 </div>
               )}
-              {isGuest === false ? (
+              {user &&  (
                 <div className="d-flex justify-content-center">
                   <button className="your-memes-btn" onClick={fetchUserMemes}>
                     Your memes
                   </button>
                 </div>
-              ) : (
-                ""
-              )}
+              ) }
               {/* ======= Meme Card component */}
               <div className="container-fluid text-center memes-block">
                 {currMemes
                   ? currMemes.map((c, i) => {
                       return <MemeCard meme={c} key={i} />;
                     })
-                  : ""}
+                  : <LoadingMain/>}
               </div>
-              <Suspense fallback={<div>Loading...</div>}>
+              <Suspense fallback={<div></div>}>
                 <Pagination
                   pages={pages}
                   changePage={changePage}
@@ -232,11 +231,12 @@ function App() {
           path="/userdata"
           element={
             <userContext.Provider value={{ memes: userMemes }}>
-              <DisplayMemes />
+              <DisplayMemes fetchUserMemes={fetchUserMemes}/>
             </userContext.Provider>
           }
         />
       </Routes>
+
     </div>
   );
 }

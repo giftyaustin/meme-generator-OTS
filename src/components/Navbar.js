@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./navbar.css";
+import { isAuthorizedUser } from "../utils/isAuthorizedUser";
+import { useDispatch } from "react-redux";
 
 
 const Navbar = ({ searchMemes }) => {
+  const dispatch = useDispatch()
   const [searchValue, setSearchValue] = useState("");
 
   // =========== form submition =============
@@ -34,13 +37,15 @@ const Navbar = ({ searchMemes }) => {
    searchMemes(cleanText);
   };
 
-
+  useEffect(()=>{
+    isAuthorizedUser(dispatch);
+  },[])
 
   return (
     <div>
       {/* ============ Navbar ============= */}
 
-      <div className="nav-holder row">
+      <div className="nav-holder">
         <div className="input-search-holder col-8">
           <div className="input-holder">
             <form
@@ -72,7 +77,7 @@ const Navbar = ({ searchMemes }) => {
             </button>
           </div>
         </div>
-        <div className="logo-holder col-4"><img className = "logo"  src={require("./images/meme-logo.png")} alt="wwe" /></div>
+        <div className="logo-holder"><img className = "logo"  src={require("./images/meme-logo.png")} alt="wwe" /></div>
       </div>
     </div>
   );

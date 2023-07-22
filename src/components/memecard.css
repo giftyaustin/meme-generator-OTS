@@ -7,18 +7,9 @@
     border-radius: 10px;
     font-size: small;
     top: 0px;
-    animation: meme-template;
-    animation-duration: 1s;
+   
 }
 
-@keyframes meme-template {
-        from{
-            top : -200px
-        }    
-        to{
-            top : 0px
-        }
-}
 
 .meme-card{
     display: flex;

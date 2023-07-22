@@ -1,6 +1,7 @@
-import React  from 'react';
+import React, { useEffect }  from 'react';
 import "./memecard.css";
 import {useNavigate} from "react-router-dom"
+import { isAuthorizedUser } from '../utils/isAuthorizedUser';
 
 
 const MemeCard = ({meme}) => {
@@ -17,9 +18,7 @@ history("/generate")
     <div style={{"display":"inline-block"}}className='meme-'>
         
       <div className="meme-card-holder">
-        <div className="meme-card justify-content-center" onClick={()=>{
-          memeSelected();
-        }}>
+        <div className="meme-card justify-content-center" onClick={memeSelected}>
             <div className='justify-content-center big-screen'>
         
             <div className='meme-name-holder text-start'>

@@ -3,21 +3,21 @@ import "./generate.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { saveAs } from "file-saver";
-import { useContext } from "react";
-import { userContext } from "./context/userContext";
+import { useSelector } from "react-redux";
+
 
 const Generate = () => {
-  const {isGuest} = useContext(userContext)
+  const {user} = useSelector(state=>state.user)
   const history = useNavigate();
-  const [url, setUrl] = useState();
+  const [meme, setMeme] = useState(JSON.parse(sessionStorage.getItem("memeSelected")) || '');
+  const url = meme.url
 
-  const [generatedMemeUrl, setGeneratedMemeUrl] = useState();
+const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
 
-  const meme = JSON.parse(sessionStorage.getItem("memeSelected"));
   const [captions, setCaptions] = useState(Array(meme.box_count).fill(""));
   const formData = new FormData();
   formData.append("username", "giftyaustin");
-  formData.append("password", "Nikka@c00lie");
+  formData.append("password", process.env.REACT_APP_IMGFLIP_PASSWORD);
 
   formData.append("template_id", meme.id);
   const arr = [];
@@ -30,52 +30,36 @@ const Generate = () => {
 
   //  = ====================== function to fetch meme from api ==================
 
-  const fetchRawMeme = () => {
-    fetch("https://api.imgflip.com/caption_image", {
-      method: "POST",
-      body: formData,
-    }).then((res) => {
-      res.json().then((res) => {
-        try {
-          setUrl(res.data.url);
-        } catch (error) {
-          console.log(error);
-        }
-      });
-    });
-  };
-
-  useEffect(() => {
-    fetchRawMeme();
-  }, []);
+ 
 
 
-  const storeMeme = ()=>{ 
-   if(generatedMemeUrl){
+
+
+  const storeMeme = (imageUrl)=>{ 
+  
    
-      if(!isGuest){
-        const data = {image:generatedMemeUrl, at: localStorage.getItem('at')}
-        fetch("http://localhost:5000/upload", {
+      if(user){
+      
+        const data = {image:imageUrl}
+        fetch(`${process.env.REACT_APP_CLIENT_URL}/image/upload`, {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
+          credentials:'include'
         }).catch((err)=>{console.log(err)})
+        alert('Your meme is now stored on cloud, you can access it later')
       }
-    }
-    
   }
 
-  useEffect(()=>{
-    storeMeme();
-  },[generatedMemeUrl])
+ 
 
 
   // ==========================================================================
 
   // ================= meme generation ===================
-  const generateMeme = () => {
+  const generateMeme = (storeMeme) => {
     const memeFormData = new FormData();
-    memeFormData.append("password", "Nikka@c00lie");
+    memeFormData.append("password", process.env.REACT_APP_IMGFLIP_PASSWORD);
     memeFormData.append("username", "giftyaustin");
     memeFormData.append("template_id", meme.id);
     captions.forEach((c, i) => {
@@ -87,7 +71,8 @@ const Generate = () => {
     }).then((res) => {
       res.json().then((res) => {
         try {
-          setGeneratedMemeUrl(res.data.url);
+          storeMeme(res.data.url)
+          setGeneratedMemeUrl(res.data.url)
        
          
         } catch (error) {
@@ -107,17 +92,24 @@ const Generate = () => {
   }
   return (
     <div className="container">
+
+
+      {/* back button functionality */}
+
       <div className="back-btn-holder my-3 btn">
         <button
           className="back-btn btn btn-danger"
           onClick={() => {
-            sessionStorage.clear();
             history("/main");
           }}
         >
           Back
         </button>
       </div>
+
+      {/* ======== meme-template ========= */}
+
+
       <div className="template-holder gm-holder">
         {generatedMemeUrl ? (
           <img
@@ -177,7 +169,7 @@ const Generate = () => {
             })
             if(filteredCaptions.length !==0){
            
-              generateMeme()
+              generateMeme(storeMeme)
             }
             else{
               alert('Enter atleast one caption')

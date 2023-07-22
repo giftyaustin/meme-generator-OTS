@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 const LoginPage = () => {
   const history = useNavigate();
   const [login, setLogin] = useState(true);
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [rusername, setRusername] = useState("");
   const [rpassword, setRpassword] = useState("");
   const handleRegistration = async () => {
@@ -16,17 +16,18 @@ const LoginPage = () => {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(data),
+        credentials: 'include',
       });
-      response.json().then((res) => {
-        if (res.at.length) {
-          localStorage.setItem("at", res.at);
-          history("/main");
-        }
-        
-      });
+      const res = await response.json()
+      if(res.success){
+        history('/main')
+      }
+      else{
+        alert("Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters")
+      }
     }
     else{
-        alert("Enter credentials")
+        alert("Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters")
     }
   };
 
@@ -38,18 +39,19 @@ const handleLogin=async()=>{
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
+          credentials: 'include',
         });
-        response.json().then((res) => {
-          if (res.at) {
-            localStorage.setItem("at", res.at);
-            history("/main");
-          }
-          else{
-            alert(res.message)
-          }
-          
-        });
+        const res = await response.json()
+        if(res.success){
+          history('/main')
+        }
+        else{
+          alert(res.message)
+        }
       }
+      else{
+        alert("Re-enter credentials")
+    }
 }
 
   return (
@@ -103,7 +105,10 @@ const handleLogin=async()=>{
                 </button>
               </div>
             </div>
-          ) : (
+          ) :
+          
+          // ======== registration ====
+          (
             <div className="login-outline d-inline-block ">
               <div className="light-point"></div>
 
@@ -127,6 +132,7 @@ const handleLogin=async()=>{
                       setRpassword(e.target.value);
                     }}
                   />
+
                 </div>
               </div>
 

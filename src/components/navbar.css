@@ -1,10 +1,12 @@
 .nav-holder{
+    position:relative;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgb(160, 147, 147);
     padding: 15px;
     border-radius: 6px;
     margin-top: 3px;
+    overflow: hidden;
 }
 
 .input-search-holder{
@@ -23,21 +25,11 @@
     padding-left: 10px;
     background-color: rgb(238, 238, 238);
     padding-bottom: 3px;
-    animation: search-box;
-    animation-duration: 1s;
     color: black;
     outline: none;
     border: none;
 }
-@keyframes search-box {
-    from{
-     left: -200px;
-    }
-    to{
-        left: 0px;
-    }
-    
-}
+
 
 
 .search-holder{
@@ -54,19 +46,9 @@
     border: #6f2232;
     padding-bottom: 8px;
     box-shadow: 0 0 3px 1px rgba(150, 150, 150, 0.242);
-    animation: search-btn;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
 }
 
-@keyframes search-btn {
-    from{
-        top: -50px;
-    }
-    to{
-        top: 0px;
-    }
-}
+
 .search-btn:hover{
     color: rgb(229, 229, 229);
     background-color: #950740;
@@ -75,32 +57,35 @@
 
 .logo-holder{
     display: flex;
-    
+    position: absolute;
     height: 35px;
     overflow-x: hidden;
-}
-
-.logo{
-    
-    position: relative;
-    object-fit: contain;
-    width: 100%;
+    right: 5px;
+    width: 100px;
     animation: logo;
     animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
     animation-duration: 3s;
     animation-iteration-count: infinite;
-    right: -110px;
+}
+
+.logo{
+    object-fit: contain;
+    width: 100%;
     
 }
 @keyframes logo {
     from{
-        right: -110px;
+        right: -40vw;
+    }
+    30%{
+       right: 10px;
     }
     50%{
-       right: -5px;
+        right: 10px;
+
     }
     to{
-        right: -125px;
+        right: -40vw;
     }
     
 }
