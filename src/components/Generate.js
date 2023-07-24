@@ -15,7 +15,7 @@ const Generate = () => {
   const generateBtnLoading = useSelector(state=>state.button.generateBtnLoading)
   const generatedMemeLoading = useSelector(state=>state.button.generatedMeme)
   const history = useNavigate();
- const meme = useState(JSON.parse(sessionStorage.getItem("memeSelected")) || '')
+ const [meme, setMeme] = useState(JSON.parse(sessionStorage.getItem("memeSelected")) || '')
   const url = meme.url
 
 const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
