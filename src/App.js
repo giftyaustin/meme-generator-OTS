@@ -156,7 +156,7 @@ function App() {
           exact
           path="/main"
           element={
-            <Suspense fallback={<LoadingMain/>}>
+            <Suspense fallback={<div className="loadingMain-h"><LoadingMain/></div>}>
               {/* ====== Navbar component ====== */}
               <Navbar searchMemes={searchMemes} />
               {!pages === 0 ? (
