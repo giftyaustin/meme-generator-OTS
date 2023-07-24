@@ -125,7 +125,6 @@ function App() {
     const memedata = await response.json();
    
     if (memedata.memes && memedata.memes.length) {
-      console.log(memedata.memes)
       setUserMemes(memedata.memes);
     
     } else {

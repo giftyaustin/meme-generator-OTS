@@ -1,58 +1,73 @@
 import React, { useState } from "react";
 import "./loginpage.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBtn from "../loadingBtnComp/LoadingBtn"
+import { AUTH_LOGIN, AUTH_REGISTER } from "../../store/constants";
 
 const LoginPage = () => {
   const history = useNavigate();
+  const dispatch = useDispatch();
+  const authLoginBtnLoading = useSelector(state=>state.button.authLoginBtnLoading)
+  const authRegisterBtnLoading = useSelector(state=>state.button.authRegisterBtnLoading)
   const [login, setLogin] = useState(true);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [rusername, setRusername] = useState("");
   const [rpassword, setRpassword] = useState("");
   const handleRegistration = async () => {
+    dispatch({type:AUTH_REGISTER, payload:true})
     if (rusername.length && rpassword.length) {
       const data = { username: rusername, password: rpassword };
-      const response = await fetch(`${process.env.REACT_APP_CLIENT_URL}/signup`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify(data),
-        credentials: 'include',
-      });
-      const res = await response.json()
-      if(res.success){
-        history('/main')
-      }
-      else{
-        alert("Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters")
-      }
-    }
-    else{
-        alert("Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters")
-    }
-  };
-
-
-const handleLogin=async()=>{
-    if (username.length && password.length) {
-        const data = { username: username, password: password };
-        const response = await fetch(`${process.env.REACT_APP_CLIENT_URL}/login`, {
+      const response = await fetch(
+        `${process.env.REACT_APP_CLIENT_URL}/signup`,
+        {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify(data),
-          credentials: 'include',
-        });
-        const res = await response.json()
-        if(res.success){
-          history('/main')
+          credentials: "include",
         }
-        else{
-          alert(res.message)
-        }
+      );
+      const res = await response.json();
+      if (res.success) {
+        history("/main");
+      } else {
+        alert(
+          "Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters"
+        );
       }
-      else{
-        alert("Re-enter credentials")
+    } else {
+      alert(
+        "Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters"
+      );
     }
-}
+    dispatch({type:AUTH_REGISTER, payload:false})
+  };
+
+  const handleLogin = async () => {
+    dispatch({type:AUTH_LOGIN, payload:true})
+    if (username.length && password.length) {
+      const data = { username: username, password: password };
+      const response = await fetch(
+        `${process.env.REACT_APP_CLIENT_URL}/login`,
+        {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify(data),
+          credentials: "include",
+        }
+      );
+      const res = await response.json();
+      if (res.success) {
+        history("/main");
+      } else {
+        alert(res.message);
+      }
+    } else {
+      alert("Re-enter credentials");
+    }
+    dispatch({type:AUTH_LOGIN,payload:false})
+  };
 
   return (
     <div className="decorate">
@@ -87,8 +102,11 @@ const handleLogin=async()=>{
 
               <div className="line mb-3"></div>
               <div className="login-btn-h d-flex justify-content-center ">
-                <button className="login-btn d-inline-block w-100" onClick={handleLogin}>
-                  Login
+                <button
+                  className="login-btn d-inline-block w-100"
+                  onClick={handleLogin}
+                >
+                  <LoadingBtn btnText={"Login"} isLoading={authLoginBtnLoading}/>
                 </button>
               </div>
               <div className="no-account-h my-3 pt-3">
@@ -105,10 +123,8 @@ const handleLogin=async()=>{
                 </button>
               </div>
             </div>
-          ) :
-          
-          // ======== registration ====
-          (
+          ) : (
+            // ======== registration ====
             <div className="login-outline d-inline-block ">
               <div className="light-point"></div>
 
@@ -132,7 +148,6 @@ const handleLogin=async()=>{
                       setRpassword(e.target.value);
                     }}
                   />
-
                 </div>
               </div>
 
@@ -142,7 +157,8 @@ const handleLogin=async()=>{
                   className="login-btn d-inline-block w-100"
                   onClick={handleRegistration}
                 >
-                  Create account
+<LoadingBtn btnText={"Create account"} isLoading={authRegisterBtnLoading}/>
+                  
                 </button>
               </div>
               <div className="no-account-h my-3 pt-3">

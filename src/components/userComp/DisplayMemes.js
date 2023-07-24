@@ -5,7 +5,6 @@ import './style.css'
 
 const DisplayMemes = ({fetchUserMemes}) => {
     const {memes} = useContext(userContext)
-    console.log(memes)
 
 
 

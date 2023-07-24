@@ -1,15 +1,21 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./generate.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { saveAs } from "file-saver";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import LoadingBtn from "./loadingBtnComp/LoadingBtn";
+import { GENERATE, GENERATED_MEME} from "../store/constants";
+import LoadingMain from "./loadingComp/LoadingMain"
 
 
 const Generate = () => {
   const {user} = useSelector(state=>state.user)
+  const dispatch = useDispatch()
+  const generateBtnLoading = useSelector(state=>state.button.generateBtnLoading)
+  const generatedMemeLoading = useSelector(state=>state.button.generatedMeme)
   const history = useNavigate();
-  const [meme, setMeme] = useState(JSON.parse(sessionStorage.getItem("memeSelected")) || '');
+ const meme = useState(JSON.parse(sessionStorage.getItem("memeSelected")) || '')
   const url = meme.url
 
 const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
@@ -58,6 +64,7 @@ const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
 
   // ================= meme generation ===================
   const generateMeme = (storeMeme) => {
+   
     const memeFormData = new FormData();
     memeFormData.append("password", process.env.REACT_APP_IMGFLIP_PASSWORD);
     memeFormData.append("username", "giftyaustin");
@@ -73,11 +80,13 @@ const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
         try {
           storeMeme(res.data.url)
           setGeneratedMemeUrl(res.data.url)
-       
+          
          
         } catch (error) {
           console.log(error);
         }
+        dispatch({type:GENERATE,payload:false})
+          dispatch({type:GENERATED_MEME, payload:false})
       });
     });
   };
@@ -114,10 +123,11 @@ const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
         {generatedMemeUrl ? (
           <img
             src={generatedMemeUrl}
-            alt="Meme generated"
+            alt={'Meme Template'}
             className="meme-template-generate gm-o"
           />
         ) : (
+          generatedMemeLoading? <LoadingMain/> :
           <img
             src={url ? url : ""}
             alt="Meme Template"
@@ -162,20 +172,26 @@ const [generatedMemeUrl, setGeneratedMemeUrl] = useState('')
         </div>
       ) : (
         <div className="text-center my-3">
-          <button className="btn generate-btn" onClick={()=>{
+          <button className="generate-btn" onClick={()=>{
+            dispatch({type:GENERATE, payload:true})
+            dispatch({type:GENERATED_MEME, payload:true})
             var filteredCaptions = []
             filteredCaptions = captions.filter((c)=>{
               return(c!==""&&c.replaceAll(" ","")!=="")
             })
+           
             if(filteredCaptions.length !==0){
+             
            
               generateMeme(storeMeme)
             }
             else{
               alert('Enter atleast one caption')
+              dispatch({type:GENERATE, payload:false})
+              dispatch({type:GENERATED_MEME, payload:false})
             }
           }}>
-            Generate
+            {<LoadingBtn isLoading={generateBtnLoading} btnText={'Generate'}/>}
           </button>
         </div>
       )}

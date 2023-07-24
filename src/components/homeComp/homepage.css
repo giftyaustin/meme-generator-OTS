@@ -14,3 +14,7 @@
     background-color: transparent;
     color: white;
 }
+.guest-btn:hover, .home-login-btn:hover{
+    border: 1px solid #c3073f;
+    transition: 0.2s;
+}

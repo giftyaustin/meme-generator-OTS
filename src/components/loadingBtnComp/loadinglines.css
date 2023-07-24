@@ -1,0 +1,21 @@
+.LoadingLines{
+    width: 20px;
+    height: 20px;
+    border-bottom: 3px solid rgb(243, 243, 243);
+    border-radius: 50%;
+    animation: rotateLoading 0.5s linear 0s infinite ;
+}
+@keyframes rotateLoading {
+    0%{
+        transform: rotate(0deg)
+    }
+    100%{
+        transform: rotate(360deg)
+    }
+}
+.LoadingBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
