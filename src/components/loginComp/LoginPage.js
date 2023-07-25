@@ -21,6 +21,12 @@ const LoginPage = () => {
   const handleRegistration = async () => {
     dispatch({type:AUTH_REGISTER, payload:true})
     if (rusername.length && rpassword.length) {
+      if(rusername.length<5 && rpassword.length <8){
+        alert("Username must be greater that 4 characters and password must be atleast 8 charachters")
+        dispatch({type:AUTH_REGISTER, payload:false})
+        return;
+
+      }
       const data = { username: rusername, password: rpassword };
       const response = await fetch(
         `${process.env.REACT_APP_CLIENT_URL}/signup`,
@@ -32,13 +38,12 @@ const LoginPage = () => {
         }
       );
       const res = await response.json();
-      console.log(res.success)
+      
       if (res.success) {
         history("/main");
       } else {
-        console.log(res.success, "else")
         alert(
-          "Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters"
+          "username already exists"
         );
       }
     } else {
