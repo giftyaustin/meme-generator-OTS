@@ -15,6 +15,9 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [rusername, setRusername] = useState("");
   const [rpassword, setRpassword] = useState("");
+
+  // registration 
+
   const handleRegistration = async () => {
     dispatch({type:AUTH_REGISTER, payload:true})
     if (rusername.length && rpassword.length) {
@@ -29,9 +32,11 @@ const LoginPage = () => {
         }
       );
       const res = await response.json();
+      console.log(res.success)
       if (res.success) {
         history("/main");
       } else {
+        console.log(res.success, "else")
         alert(
           "Re-enter credentials, username must be atleast 5 characters and password must be greater than 7 caharacters"
         );
