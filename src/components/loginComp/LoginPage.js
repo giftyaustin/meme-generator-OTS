@@ -21,7 +21,7 @@ const LoginPage = () => {
   const handleRegistration = async () => {
     dispatch({type:AUTH_REGISTER, payload:true})
     if (rusername.length && rpassword.length) {
-      if(rusername.length<5 && rpassword.length <8){
+      if(rusername.length<5 || rpassword.length <8){
         alert("Username must be greater that 4 characters and password must be atleast 8 charachters")
         dispatch({type:AUTH_REGISTER, payload:false})
         return;
